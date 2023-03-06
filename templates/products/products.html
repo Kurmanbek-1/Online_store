@@ -2,12 +2,16 @@
 {% load static %}
 
 
+{% block title %}
+    hello
+{% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'products.css' %}">
+{% endblock %}
 
 
 {% block content %}
-
-    <link rel="stylesheet" href="{% static 'products.css' %}">
     <form action="/products/" method="get">
         {% csrf_token %}
         <input type="text" name="search">

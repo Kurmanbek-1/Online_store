@@ -6,7 +6,6 @@ from Online_store_HW.forms import ProductCreateForm, ReviewCreateForm
 from Online_store_HW.constants import PAGINATION_LIMIT
 
 
-
 def hello(request):
     if request.method == "GET":
         return HttpResponse('Hello! Its my project')
@@ -15,6 +14,7 @@ def hello(request):
 def now_date(request):
     if request.method == 'GET':
         return HttpResponse(datetime.now())
+
 
 def goodbay(request):
     if request.method == 'GET':
@@ -25,12 +25,12 @@ def main_view(request):
     if request.method == 'GET':
         return render(request, 'layouts/index.html')
 
+
 def products_view(request):
     if request.method == 'GET':
         products = Product.objects.all()
         search = request.GET.get('search')
         page = int(request.GET.get('page', 1))
-
 
         if search:
             products = products.filter(title__contains=search) | products.filter(description__contains=search)
@@ -41,9 +41,7 @@ def products_view(request):
         else:
             max_page = round(max_page)
 
-        products = products[PAGINATION_LIMIT * (page-1):PAGINATION_LIMIT*page]
-
-
+        products = products[PAGINATION_LIMIT * (page - 1):PAGINATION_LIMIT * page]
 
         context = {
             'products': [
@@ -57,7 +55,7 @@ def products_view(request):
                 } for product in products
             ],
             'user': request.user,
-            'pages': range(1, max_page+1)
+            'pages': range(1, max_page + 1)
         }
         return render(request, 'products/products.html', context=context)
 
@@ -85,7 +83,6 @@ def product_detail_view(request, id):
 
         return render(request, 'products/detail.html', context=context)
 
-
     if request.method == 'GET':
         product = Product.objects.get(id=id)
         data = request.PRODUCT
@@ -104,6 +101,7 @@ def product_detail_view(request, id):
         }
 
         return render(request, 'products/detail.html', context=context)
+
 
 def create_product_view(request):
     if request.method == 'GET':
