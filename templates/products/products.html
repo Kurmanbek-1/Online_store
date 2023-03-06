@@ -1,30 +1,31 @@
 {% extends 'layouts/index.html' %}
+{% load static %}
+
+
+
+
 
 {% block content %}
-    <style type="text/css">
-        .products {
-            display: flex;
-            justify-content: space-between;
-            width: 80%;
-            margin-left: 10%;
-            flex-wrap: wrap;
-        }
 
-        .products_block {
-            margin: 20px;
-        }
+    <link rel="stylesheet" href="{% static 'products.css' %}">
+    <form action="/products/" method="get">
+        {% csrf_token %}
+        <input type="text" name="search">
+        <input type="submit" name="Search">
+    </form>
 
-        .product_image {
-            width: 100%;
-        }
-
-    </style>
     <div class="products">
         {% for product in products %}
-            <dev class="products_block">
+            <dev class="product_block">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <img class="product_image" src="/media/{{ product.image }}" alt="">
+
+                        {% if product.image %}
+                            <img class="product_image" src="/media/{{ product.image }}" alt="" width="250px">
+                        {% else %}
+                            <img class="product_image" src="../../media/img_1.png" alt="" width="250px">
+                        {% endif %}
+
                         <h5 class="card-title">{{ product.title }}</h5>
                         <h6 class="card-title">Rate: {{ product.rate }}</h6>
 
@@ -32,10 +33,17 @@
                             <p>{{ hashtag.title }}</p>
                         {% endfor %}
 
-                        <a href="#" class="card-link">More</a>
+                        <a href="/products/{{ product.id }}/" class="card-link">More</a>
                     </div>
                 </div>
             </dev>
+        {% endfor %}
+    </div>
+    <div class="pages">
+        {% for page in pages %}
+            <a href="/products/?page={{ page }}">
+                <button class="page_button">{{ page }}</button>
+            </a>
         {% endfor %}
     </div>
 {% endblock %}

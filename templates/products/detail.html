@@ -1,0 +1,122 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <style type="text/css">
+        .product {
+            width: 80%;
+            margin-left: 10%,
+        }
+        .dates {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+    </style>
+    <div class="product">
+        <img src="/media/{{ product.image }}" alt="">
+        <h1>{{ product.title }}</h1>
+        <h5>{{ product.description }}</h5>
+        <div class="dates">
+            <h6>{{ product.created_date }}</h6>
+            <h6>{{ product.modified_date }}</h6>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#{% extends 'layouts/index.html' %}#}
+{#{% load static %}#}
+{##}
+{##}
+{#{% block content %}#}
+{#    <style type="text/css">#}
+{#    .product {#}
+{#        width: 80%;#}
+{#        margin-left: 10%;#}
+{#    }#}
+{#    .product > img {#}
+{#        width: 100%;#}
+{#    }#}
+{#    .dates {#}
+{#        display: flex;#}
+{#        justify-content: space-between;#}
+{#        margin-top: 40px;#}
+{#    }#}
+{#    .review_block {#}
+{#        padding: 10px;#}
+{#        background: #242b2e;#}
+{#        color: #fff;#}
+{#        margin-bottom: 20px;#}
+{#    }#}
+{#    .review_title {#}
+{#        font-size: 26px;#}
+{#        font-weight: bold;#}
+{#        margin-top: 40px;#}
+{#    }#}
+{#    </style>#}
+{#    <div class="product">#}
+{##}
+{#        {% if product.image %}#}
+{#            <img src="/media/{{ product.image }}" alt="">#}
+{#        {% else %}#}
+{#            <img src="/media/img.png" alt="">#}
+{#        {% endif %}#}
+{##}
+{#        <h1>{{ product.title }}</h1>#}
+{#        <h5>{{ product.description }}</h5>#}
+{##}
+{#        <div class="dates">#}
+{#            <h6>{{ product.created_date }}</h6>#}
+{#            <h6>{{ product.medified_date }}</h6>#}
+{#        </div>#}
+{##}
+{#        <p class="reviews_title">Reviews</p>#}
+{##}
+{#        <form action="/products/{{ product.id }}/" method="post">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }}#}
+{#            <input type="submit" value="Add Review">#}
+{#        </form>#}
+{##}
+{#        <div class="review">#}
+{##}
+{#            {% for review in reviews %}#}
+{#                <div class="review_block">#}
+{#                    <h6>{{ review.text }}</h6>#}
+{#                     <p>{{ review.rate }}</p>#}
+{#                    <p>{{ review.created_date }}</p>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
+{##}
+{##}
+{#{% extends 'layouts/index.html' %}#}
+{##}
+{#{% block content %}#}
+{#    <h1>{{ product.title }}</h1>#}
+{#{% endblock %}#}

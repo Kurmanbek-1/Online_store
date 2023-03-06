@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from HW.views import hello, now_date, goodbay, main_view, products_view, hashtags_view
+from HW.views import hello, now_date, goodbay, main_view, products_view, hashtags_view, product_detail_view, create_product_view
 from django.conf.urls.static import static
 from Online_store_HW.settings import MEDIA_URL, MEDIA_ROOT
 
@@ -26,8 +26,9 @@ urlpatterns = [
     path('goodby/', goodbay),
     path('', main_view),
     path('products/', products_view),
+    path('products/<int:id>/', product_detail_view),
     path('hashtags/', hashtags_view),
-
+    path('products/create/', create_product_view),
 ]
 
 urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
