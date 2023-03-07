@@ -36,7 +36,7 @@ def products_view(request):
             products = products.filter(title__contains=search) | products.filter(description__contains=search)
 
         max_page = products.__len__() / PAGINATION_LIMIT
-        if round(max_page) == round(max_page) + 1:
+        if round(max_page) < max_page:
             max_page = round(max_page) + 1
         else:
             max_page = round(max_page)
@@ -77,15 +77,15 @@ def product_detail_view(request, id):
 
         context = {
             'product': product,
-            'review': product.review.all(),
+            'reviews': product.review.all(),
             'form': ReviewCreateForm
         }
 
         return render(request, 'products/detail.html', context=context)
 
-    if request.method == 'GET':
+    if request.method == 'POST':
         product = Product.objects.get(id=id)
-        data = request.PRODUCT
+        data = request.POST
         form = ReviewCreateForm(data=data)
 
         if form.is_valid():
@@ -96,7 +96,7 @@ def product_detail_view(request, id):
 
         context = {
             'product': product,
-            'review': product.comments.all(),
+            'review': product.review.all(),
             'form': form
         }
 
